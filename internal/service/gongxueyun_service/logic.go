@@ -37,7 +37,7 @@ func (m *MoguDing) Run(runType string) {
 	}
 	m.getWeeksTime()
 	if runType == "sign" {
-		//m.SignIn()
+		m.SignIn()
 	} else if runType == "week" {
 		m.getSubmittedReportsInfo("week")
 		m.SubmitReport("week", 1500)

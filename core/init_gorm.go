@@ -10,6 +10,10 @@ import (
 )
 
 func InitGorm() *gorm.DB {
+	if global.Config.Account.Gongxueyun.Off {
+		global.Log.Warn("未启用")
+		return nil
+	}
 	if global.Config.MySql.Host == "" {
 		global.Log.Warn("未配置mysql")
 		return nil

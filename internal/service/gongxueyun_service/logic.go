@@ -3,7 +3,6 @@ package gongxueyun_service
 import (
 	"BronyaBot/global"
 	"BronyaBot/internal/api"
-	"BronyaBot/internal/entity"
 	"BronyaBot/internal/service/gongxueyun_service/data"
 	"BronyaBot/utils"
 	"BronyaBot/utils/blockPuzzle"
@@ -37,7 +36,7 @@ func (m *MoguDing) Run(runType string) {
 	}
 	m.getWeeksTime()
 	if runType == "sign" {
-		m.SignIn()
+		//m.SignIn()
 	} else if runType == "week" {
 		m.getSubmittedReportsInfo("week")
 		m.SubmitReport("week", 1500)
@@ -254,25 +253,26 @@ func (mogu *MoguDing) SignIn() {
 	global.Log.Info("================")
 	global.Log.Info(resdata.Msg)
 	global.Log.Info("================")
-	if resdata.Msg == "success" {
-		mogu.updateSignState(1)
-	} else {
-		mogu.updateSignState(0)
-	}
+	//if resdata.Msg == "success" {
+	//	mogu.updateSignState(1)
+	//} else {
+	//	mogu.updateSignState(0)
+	//}
 	utils.SendMail(mogu.Email, "检查是否打卡完成", resdata.Msg+"\n如果未成功请联系管理员")
 
 }
-func (mogu *MoguDing) updateSignState(state int) {
-	// 更新数据库表中的 state 字段
-	if mogu.ID != -1 {
-		err := global.DB.Model(&entity.SignEntity{}).Where("username = ?", mogu.PhoneNumber).Update("state", state).Error
-		if err != nil {
-			global.Log.Error(fmt.Sprintf("Failed to update state for user %s: %v", mogu.PhoneNumber, err))
-		} else {
-			global.Log.Info(fmt.Sprintf("Successfully updated state for user %s to %d", mogu.PhoneNumber, state))
-		}
-	}
-}
+
+//func (mogu *MoguDing) updateSignState(state int) {
+//	// 更新数据库表中的 state 字段
+//	if mogu.ID != -1 {
+//		err := global.DB.Model(&entity.SignEntity{}).Where("username = ?", mogu.PhoneNumber).Update("state", state).Error
+//		if err != nil {
+//			global.Log.Error(fmt.Sprintf("Failed to update state for user %s: %v", mogu.PhoneNumber, err))
+//		} else {
+//			global.Log.Info(fmt.Sprintf("Successfully updated state for user %s to %d", mogu.PhoneNumber, state))
+//		}
+//	}
+//}
 
 // 获取已经提交的日报、周报或月报的数量。
 func (mogu *MoguDing) getSubmittedReportsInfo(reportType string) {

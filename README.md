@@ -44,51 +44,55 @@
 在项目根目录下 [config](configuration/application.yaml) 文件，并根据需求填写以下字段：
 
 ```yaml
+
 mysql:
-  dataBase: sign
-  userName: root
-  passWord: 123456
-  port: 8086
-  driverName: mysql
-  host: you-url
-  log-level: debug
-  max-idle-conns: 10
-  max-open-conns: 100
-  conn-max-life-time: 5
+  dataBase: # 数据库名
+  userName: # 数据库用户名
+  passWord: # 数据库密码
+  port: # 数据库端口，默认为3306
+  driverName: # 数据库驱动名，例如：mysql
+  host: # 数据库主机地址，例如：127.0.0.1 或 localhost
+  log-level: debug # MySQL 日志级别，可选值：debug, info, warn, error
+  max-idle-conns: 10 # 最大空闲连接数
+  max-open-conns: 100 # 最大打开连接数
+  conn-max-life-time: 5 # 连接最大生存时间，单位：分钟
+
 logger:
-  level: info
-  prefix: '[🛠️]'
-  director: log
-  showLine: true
-  logInConsole: true
+  level: info # 日志级别，可选值：debug, info, warn, error
+  prefix: '[🛠️]' # 日志前缀
+  director: log # 日志文件存放目录
+  showLine: true # 是否显示日志行号
+  logInConsole: true # 是否在控制台输出日志
+
 mail:
-  host: you-host
-  port: you-port
-  user: you-user
-  password: you-password
-  ssl: true
-  local-home:           #可选
+  host: # 邮件服务器主机地址
+  port: # 邮件服务器端口
+  user: # 邮件发送用户
+  password: # 邮件发送密码
+  ssl: true # 是否使用 SSL 加密
+  local-home:           # 可选，本地邮件存储目录 (可选配置)
+
 ai:
-  token: #使用讯飞星火大模型生成报告
-  
-#为没用数据库的用户提供，无法多用户加载
+  token:  # 使用讯飞星火大模型生成报告所需的 token
 account:
   gongxueyun: #对工学云单用户无数据库服务新开账号密码登录
-    off: true                                     #off: true or false 是否开启单用户加载，单用户加载开启时无法使用mysql数据
-    phone: "13888888888"                          #phone: 手机号码
-    password: "your_password"                     #password: 密码
-    country: "China"                              #country: 国家
-    province: "Beijing"                           #province: 省份
-    city: "Beijing"                               #city: 城市
-    area: "Chaoyang"                              #area: 地区
-    latitude: "39.929986"                         #latitude: 纬度
-    longitude: "116.465416"                       #longitude: 经度
-    email: "example@example.com"                  #email: 邮箱地址
-    address: "No. 1, Chaoyang District, Beijing"  #address: 详细地址
-    type: "home"                                  #type: 类型（例如：home、work）
+    off: true                                #true为开启本地用户加载，将关闭数据库连接
+    phone: 1111111111                          #phone: 手机号码
+    password: 11dwhdiwhdi                    #password: 密码
+    country: 中国                            #country: 国家
+    province: 浙江省                         #province: 省份
+    city: 宁波市                               #city: 城市
+    area: xx区                              #area: 地区
+    latitude: 79.783787878                        #latitude: 纬度
+    longitude: 120.898978978978                      #longitude: 经度
+    email: xxxxxx@qq.com                  #email: 邮箱地址
+    address: 浙江省·xxxx.xxxxx  #address: 详细地址
   cx:
-    phone:
-    password:
+    phone: xxxxxx
+    password: xxxxxxx
+
+
+
 ```
 
 ---

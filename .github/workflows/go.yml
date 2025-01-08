@@ -19,8 +19,8 @@ permissions:
 env:
   PROJECT_NAME: ${{ github.event.repository.name }}
   BUILD_DATE: ${{ github.run_id }}
-  VERSION: 'v1.0-fix'  # 固定版本号
-  RELEASE_DIR: release
+  VERSION: 'v1.1-fix'  # 固定版本号
+  RELEASE_DIR: dev
 
 jobs:
   build:

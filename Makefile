@@ -10,6 +10,7 @@ build-all: gotool
 	make build-arm
 	make build-windows
 
+
 # 构建 Linux 平台的二进制文件
 build-linux:
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o $(RELEASE_DIR)/$(BINARY_NAME)_linux_amd64

@@ -156,7 +156,7 @@ func GenerateReportAI(userInput string, wordLimit int) string {
 		"stream": false,
 	}
 
-	request, err, _ := utils.NewHttpClient().SendRequest("POST", api.XUNFEIAPI, dat, headers)
+	request, _, err := utils.NewHttpClient().SendRequest("POST", api.XUNFEIAPI, dat, headers)
 	if err != nil {
 		global.Log.Error("Failed to send request: ", err)
 		return ""

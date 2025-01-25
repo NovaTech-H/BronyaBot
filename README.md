@@ -90,6 +90,20 @@ account:
   cx:
     phone: xxxxxx
     password: xxxxxxx
+  tasks:
+    - cron: "0 8 * * *"
+      description: "每天早上8点签到"
+      taskType: "sign"
+    - cron: "0 18 * * *"
+      description: "每天晚上6点签到"
+      taskType: "sign"
+    - cron: "0 10 * * 5"
+      description: "每周周五早上10点提交周报"
+      taskType: "week"
+    - cron: "0 10 L * *"
+      description: "每月最后一天早上10点提交月报"
+      taskType: "month"
+
 
 
 

@@ -64,12 +64,34 @@ func InitLogger() *logrus.Logger {
 	}
 	mLog.SetLevel(level)
 	scheduleLogRotation(mLog)
+	// 第一次运行时创建日志文件
+	fileWriter := createLogFile()
+	if fileWriter != nil {
+		mLog.SetOutput(io.MultiWriter(os.Stdout, fileWriter))
+	}
 	return mLog
 }
 
 func scheduleLogRotation(logger *logrus.Logger) {
 	go func() {
-		for range time.NewTicker(24 * time.Hour).C {
+		// 计算到下一个 00:00 的时间
+		now := time.Now()
+		nextMidnight := time.Date(now.Year(), now.Month(), now.Day()+1, 0, 0, 0, 0, now.Location())
+		durationUntilMidnight := nextMidnight.Sub(now)
+
+		// 创建一个定时器，在下一个 00:00 触发
+		timer := time.NewTimer(durationUntilMidnight)
+		<-timer.C
+
+		// 在 00:00 创建新的日志文件
+		fileWriter := createLogFile()
+		if fileWriter != nil {
+			logger.SetOutput(io.MultiWriter(os.Stdout, fileWriter))
+		}
+
+		// 之后每隔 24 小时触发一次
+		ticker := time.NewTicker(24 * time.Hour)
+		for range ticker.C {
 			fileWriter := createLogFile()
 			if fileWriter != nil {
 				logger.SetOutput(io.MultiWriter(os.Stdout, fileWriter))
@@ -78,6 +100,33 @@ func scheduleLogRotation(logger *logrus.Logger) {
 	}()
 }
 
+//func scheduleLogRotation(logger *logrus.Logger) {
+//	go func() {
+//		// 计算当前时间到下一个 00:00 的时间间隔
+//		now := time.Now()
+//		next := now.Add(24 * time.Hour)
+//		next = time.Date(next.Year(), next.Month(), next.Day(), 0, 0, 0, 0, next.Location())
+//		duration := next.Sub(now)
+//
+//		// 等待到下一个 00:00
+//		time.Sleep(duration)
+//
+//		// 创建日志文件
+//		fileWriter := createLogFile()
+//		if fileWriter != nil {
+//			logger.SetOutput(io.MultiWriter(os.Stdout, fileWriter))
+//		}
+//
+//		// 每隔 24 小时触发一次
+//		for range time.NewTicker(24 * time.Hour).C {
+//			fileWriter := createLogFile()
+//			if fileWriter != nil {
+//				logger.SetOutput(io.MultiWriter(os.Stdout, fileWriter))
+//			}
+//		}
+//	}()
+//}
+
 func createLogFile() *os.File {
 	logDir := global.Config.Logger.Director
 	if err := os.MkdirAll(logDir, os.ModePerm); err != nil {
@@ -85,7 +134,8 @@ func createLogFile() *os.File {
 		return nil
 	}
 
-	logFileName := fmt.Sprintf("%s/%s.log", logDir, time.Now().Format("2006-01-02_15-04-05"))
+	//var logFileName = fmt.Sprintf("%s/%s.log", logDir, time.Now().Format("2006-01-02_15-04-05"))
+	var logFileName = fmt.Sprintf("%s/%s.log", logDir, time.Now().Format("2006-01-02"))
 	logFile, err := os.OpenFile(logFileName, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 	if err != nil {
 		fmt.Printf("Failed to create log file: %v\n", err)

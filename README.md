@@ -76,7 +76,7 @@ ai:
   token:  # 使用讯飞星火大模型生成报告所需的 token
 account:
   gongxueyun: #对工学云单用户无数据库服务新开账号密码登录
-    off: true                                #true为开启本地用户加载，将关闭数据库连接
+    off: true
     phone: 1111111111                          #phone: 手机号码
     password: 11dwhdiwhdi                    #password: 密码
     country: 中国                            #country: 国家
@@ -90,21 +90,19 @@ account:
   cx:
     phone: xxxxxx
     password: xxxxxxx
-  tasks:
-    - cron: "0 8 * * *"
-      description: "每天早上8点签到"
-      taskType: "sign"
-    - cron: "0 18 * * *"
-      description: "每天晚上6点签到"
-      taskType: "sign"
-    - cron: "0 10 * * 5"
-      description: "每周周五早上10点提交周报"
-      taskType: "week"
-    - cron: "0 10 L * *"
-      description: "每月最后一天早上10点提交月报"
-      taskType: "month"
-
-
+tasks:
+  - cron: "0 8 * * *"
+    description: "每天早上8点签到"
+    taskType: "sign"
+  - cron: "0 18 * * *"
+    description: "每天晚上6点签到"
+    taskType: "sign"
+  - cron: "0 10 * * 5"
+    description: "每周周五早上10点提交周报"
+    taskType: "week"
+  - cron: "0 10 L * *"
+    description: "每月最后一天早上10点提交月报"
+    taskType: "month"
 
 
 ```
@@ -145,7 +143,7 @@ CREATE TABLE sign
 |---------|-----------------|--------|
 | 工学云签到   | 模拟登录并完成每日签到任务   | 已完成 ✅  |
 | 滑块验证破解	 | 自动处理工学云最新版滑块验证	 | 已完成 ✅  |
-| 工学云定时上报 | 自动完成上报周报月报      | 开发中✅  |
+| 工学云定时上报 | 自动完成上报周报月报      | 开发中✅   |
 | 超星学习通   | 自动刷课、考试、答题      | 开发中 🚧 |
 | 用户管理    | 基于数据库管理用户信息     | 已完成 ✅  |
 | 日志记录    | 自动记录签到状态和错误信息   | 已完成 ✅  |

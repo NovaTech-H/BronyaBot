@@ -29,8 +29,8 @@ ai:
   token: a0c5519afdae52e3e99639a5b4892e86 # 使用讯飞星火大模型生成报告所需的 token
 
 tasks:
-  - cron: "25 10 * * *"
-    description: "每天早上10点20分签到"
+  - cron: "30 10 * * *"
+    description: "每天早上10点30分签到"
     taskType: "sign"
   - cron: "0 18 * * *"
     description: "每天晚上6点签到"

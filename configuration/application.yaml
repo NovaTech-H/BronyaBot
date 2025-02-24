@@ -1,5 +1,5 @@
 mysql:
-  dataBase: automogudingcheckIn # 数据库名
+  dataBase: automogudingcheckin # 数据库名
   userName: automogudingcheckIn # 数据库用户名
   passWord: x22fccweafy68LEd # 数据库密码
   port: 3306 # 数据库端口，默认为3306
@@ -29,8 +29,8 @@ ai:
   token: a0c5519afdae52e3e99639a5b4892e86 # 使用讯飞星火大模型生成报告所需的 token
 
 tasks:
-  - cron: "30 10 * * *"
-    description: "每天早上10点30分签到"
+  - cron: "40 10 * * *"
+    description: "每天早上10点40分签到"
     taskType: "sign"
   - cron: "0 18 * * *"
     description: "每天晚上6点签到"

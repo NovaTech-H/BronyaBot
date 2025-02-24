@@ -1,10 +1,10 @@
 mysql:
-  dataBase: # 数据库名
-  userName: # 数据库用户名
-  passWord: # 数据库密码
-  port: # 数据库端口，默认为3306
-  driverName: # 数据库驱动名，例如：mysql
-  host: # 数据库主机地址，例如：127.0.0.1 或 localhost
+  dataBase: automogudingcheckIn # 数据库名
+  userName: automogudingcheckIn # 数据库用户名
+  passWord: x22fccweafy68LEd # 数据库密码
+  port: 3306 # 数据库端口，默认为3306
+  driverName: mysql # 数据库驱动名，例如：mysql
+  host: localhost # 数据库主机地址，例如：127.0.0.1 或 localhost
   log-level: debug # MySQL 日志级别，可选值：debug, info, warn, error
   max-idle-conns: 10 # 最大空闲连接数
   max-open-conns: 100 # 最大打开连接数
@@ -18,34 +18,19 @@ logger:
   logInConsole: true # 是否在控制台输出日志
 
 mail:
-  host: # 邮件服务器主机地址
-  port: # 邮件服务器端口
-  user: # 邮件发送用户
-  password: # 邮件发送密码
+  host: smtp.qq.com # 邮件服务器主机地址
+  port: 465 # 邮件服务器端口
+  user: 2407792550@qq.com # 邮件发送用户
+  password: cduucdhhrszpdiag # 邮件发送密码
   ssl: true # 是否使用 SSL 加密
   local-home:           # 可选，本地邮件存储目录 (可选配置)
 
 ai:
-  token:  # 使用讯飞星火大模型生成报告所需的 token
-account:
-  gongxueyun: #对工学云单用户无数据库服务新开账号密码登录
-    off: true
-    phone: 1111111111                          #phone: 手机号码
-    password: 11dwhdiwhdi                    #password: 密码
-    country: 中国                            #country: 国家
-    province: 浙江省                         #province: 省份
-    city: 宁波市                               #city: 城市
-    area: xx区                              #area: 地区
-    latitude: 79.783787878                        #latitude: 纬度
-    longitude: 120.898978978978                      #longitude: 经度
-    email: xxxxxx@qq.com                  #email: 邮箱地址
-    address: 浙江省·xxxx.xxxxx  #address: 详细地址
-  cx:
-    phone: xxxxxx
-    password: xxxxxxx
+  token: a0c5519afdae52e3e99639a5b4892e86 # 使用讯飞星火大模型生成报告所需的 token
+
 tasks:
-  - cron: "0 8 * * *"
-    description: "每天早上8点签到"
+  - cron: "25 10 * * *"
+    description: "每天早上10点20分签到"
     taskType: "sign"
   - cron: "0 18 * * *"
     description: "每天晚上6点签到"
